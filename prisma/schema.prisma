@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Classes{
+  id Int @id @default(autoincrement())
+  title String  @db.VarChar(50)
+  description String  @db.VarChar(255)
+  street String  @db.VarChar(255)
+  adress_number String  @db.VarChar(255)
+  city String  @db.VarChar(255)
+  district String  @db.VarChar(255)
+  zip_code String @db.VarChar(50)
+  federated_unity String @db.VarChar(2)
+  date DateTime @default(now())
+  phone String @db.VarChar(50)
+  members Int @db.Integer
+  creator_id Int @default(autoincrement())
+  catergorie_id Int @default(autoincrement())
+  class_deleted Boolean @default(false)
+
+}
