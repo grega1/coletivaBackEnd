@@ -10,21 +10,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Classes{
-  id Int @id @default(autoincrement())
-  title String  @db.VarChar(50)
-  description String  @db.VarChar(255)
-  street String  @db.VarChar(255)
-  adress_number String  @db.VarChar(255)
-  city String  @db.VarChar(255)
-  district String  @db.VarChar(255)
-  zip_code String @db.VarChar(50)
-  federated_unity String @db.VarChar(2)
-  date DateTime @default(now())
-  phone String @db.VarChar(50)
-  members Int @db.Integer
-  creator_id Int @default(autoincrement())
-  catergorie_id Int @default(autoincrement())
-  class_deleted Boolean @default(false)
+model Classes {
+  id              Int          @id @default(autoincrement())
+  title           String       @db.VarChar(50)
+  description     String       @db.VarChar(255)
+  street          String       @db.VarChar(255)
+  address_number  Int          @db.Integer
+  zip_code        Int          @db.Integer
+  city            String       @db.VarChar(255)
+  district        String       @db.VarChar(255)
+  federated_unity String       @db.VarChar(2)
+  date            DateTime     @default(now())
+  phone           Int          @db.Integer
+  members         Int          @db.Integer
+  creator         Users        @relation(fields: [creator_id], references: [id])
+  creator_id      Int          @unique
+  category        Categories   @relation(fields: [category_id], references: [id])
+  category_id     Int          @unique
+  class_deleted   Boolean      @default(false)
+  class_user      class_user[]
+}
 
+model Users {
+  id           Int          @id @default(autoincrement())
+  full_name    String       @unique @db.VarChar(255)
+  email        String       @unique @db.VarChar(255)
+  password     String       @db.VarChar(255)
+  phone_number Int
+  type         String       @default("user")
+  Classes      Classes?
+  class_user   class_user[]
+}
+
+model Categories {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique @db.VarChar(255)
+  description String
+  Classes     Classes?
+}
+
+model class_user {
+  id       Int     @id @default(autoincrement())
+  class    Classes @relation(fields: [class_id], references: [id])
+  class_id Int
+  user     Users   @relation(fields: [user_id], references: [id])
+  user_id  Int
+
+  @@unique([class_id, user_id])
 }
