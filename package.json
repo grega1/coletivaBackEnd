@@ -5,8 +5,12 @@
   "repository": "https://github.com/grega1/coletivaBackEnd.git",
   "author": "Grego",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
+    "@prisma/client": "^3.6.0",
     "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "node": "^17.2.0",
