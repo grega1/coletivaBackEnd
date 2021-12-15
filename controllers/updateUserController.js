@@ -1,6 +1,6 @@
 import {
     updateUsersServices
-} from '../services/updateUserServices.js';
+} from '../services/updateUsersServices.js';
 import jsonwebtoken from "jsonwebtoken";
 import dotenv from 'dotenv';
 dotenv.config();

@@ -1,6 +1,6 @@
 import {
     updateCategoryServices
-} from '../services/updateCategoryServices.js';
+} from '../services/updateCategoryService.js';
 import jsonwebtoken from "jsonwebtoken";
 import dotenv from 'dotenv';
 dotenv.config();
